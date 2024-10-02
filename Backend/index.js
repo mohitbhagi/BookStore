@@ -10,8 +10,7 @@ dotenv.config();
 app.use(cors());
 app.use(express.json());
 
-const PORT = process.env.PORT || 3000;
-const URI = process.env.MongoDBURI;
+// const PORT = process.env.PORT || 3000;
 
 app.use("/book", BookRoute);
 app.use("/user", UserRoute);
@@ -22,13 +21,13 @@ main()
     }).catch(err => console.log(err));
 
 async function main() {
-  await mongoose.connect(URI);
+  await mongoose.connect("mongodb://127.0.0.1:27017/BookStore");
 }
 
 app.get("/", (req, res) => {
     res.send("Server is running");
 });
 
-app.listen(PORT, () => {
-    console.log(`Server is listening to ${PORT}`);
+app.listen(8080, () => {
+    console.log("Server is listening to 8080");
 });
